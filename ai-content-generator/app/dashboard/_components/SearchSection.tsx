@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import React from "react";
 
-const SearchSection = () => {
+const SearchSection = ({ onSearchInput }: any) => {
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-xl shadow-lg">
       <h2 className="text-3xl font-semibold text-gray-900 mb-4">
@@ -19,6 +19,7 @@ const SearchSection = () => {
           </div>
           {/* Search input */}
           <input
+            onChange={(e) => onSearchInput(e.target.value)}
             type="text"
             placeholder="Search templates..."
             className="w-full px-4 py-2 bg-transparent text-gray-800 placeholder-gray-400 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
