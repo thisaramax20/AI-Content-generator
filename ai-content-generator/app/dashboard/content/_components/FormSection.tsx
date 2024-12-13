@@ -5,15 +5,19 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { Loader } from "lucide-react";
 
 interface PROPS {
   selectedTemplate: TEMPLATE | undefined;
   userFormInput: any;
+  loading: boolean;
 }
-const FormSection = ({ selectedTemplate, userFormInput }: PROPS) => {
+const FormSection = ({ selectedTemplate, userFormInput, loading }: PROPS) => {
   const [formData, setFormData] = useState<any>();
 
   const handleInputChange = (e: any) => {
+    console.log(process.env.Google_GEMINI_API_KEY);
+
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -68,7 +72,11 @@ const FormSection = ({ selectedTemplate, userFormInput }: PROPS) => {
         ))}
 
         {/* Submit Button */}
-        <Button className="w-full py-3 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
+        <Button
+          disabled={loading}
+          className="w-full py-3 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+        >
+          {loading && <Loader className="animate-spin" />}
           Generate Content
         </Button>
       </form>
